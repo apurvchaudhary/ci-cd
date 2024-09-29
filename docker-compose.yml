@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  fastapi-backend:
+    build: ./engine
+    container_name: fastapi-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./engine:/app
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
